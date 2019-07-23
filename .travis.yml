@@ -17,9 +17,9 @@ jobs:
   fast_finish: true
   include:
     - stage: Deploy release branch
-      if: branch = deploy-123-12   AND type = push
+      if: branch =  /^(?i:deploy)-.*$/   AND type = push
       deploy:
         - provider: script
           script: ./deploy-test.sh
           on:
-            branch: deploy-123-12 
+            branch:  /^(?i:deploy)-.*$/ 
