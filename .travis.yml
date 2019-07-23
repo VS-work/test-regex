@@ -12,7 +12,6 @@ script:
 - echo "skipping tests"
 branches:
   only:
-  - master
   - /^(?i:deploy)-.*$/
 jobs:
   fast_finish: true
