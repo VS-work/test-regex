@@ -13,8 +13,7 @@ script:
 branches:
   only:
   - master
-  - development
-  - release-2019-07-03
+  - /^(?i:deploy)-.*$/
 jobs:
   fast_finish: true
   include:
@@ -24,4 +23,4 @@ jobs:
         - provider: script
           script: ./deploy-test.sh
           on:
-            branch: release-2019-07-03
+            branch: /^(?i:deploy)-.*$/
