@@ -11,6 +11,8 @@ script:
 - echo "skipping tests"
 - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+- echo "$TRAVIS_BRANCH =~ ^deploy.*$"
+
 
 jobs:
   fast_finish: true
@@ -21,4 +23,4 @@ jobs:
           script: ./deploy-test.sh
           on:
             all_branches: true
-            condition: $BRANCH == /^deploy.*$/
+            condition: $TRAVIS_BRANCH =~ ^deploy.*$
