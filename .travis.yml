@@ -17,10 +17,11 @@ jobs:
   fast_finish: true
   include:
     - stage: Deploy release branch
+      if: branch =  ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^deploy\/.*$    AND type = push
       deploy:
         - provider: script
           script: ./deploy-test.sh
           on:
             all_branches: true
             condition: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^deploy\/.*$ 
-                
+          
