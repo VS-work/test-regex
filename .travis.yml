@@ -1,0 +1,27 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js: '8'
+notifications:
+  email: false
+git:
+  submodules: false
+stages:
+  - name: Deploy release branch
+script:
+- echo "skipping tests"
+branches:
+  only:
+  - master
+  - development
+  - release-2019-07-03
+jobs:
+  fast_finish: true
+  include:
+    - stage: Deploy release branch
+      if: branch =~ release-2019-07-03  AND type = push
+      deploy:
+        - provider: script
+          script: ./deploy-test.sh
+          on:
+            branch: release-2019-07-03
