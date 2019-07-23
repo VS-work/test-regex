@@ -18,6 +18,7 @@ jobs:
   fast_finish: true
   include:
     - stage: Deploy release branch
+    if: $TRAVIS_BRANCH =~ ^deploy.*$ AND type = push
       deploy:
         - provider: script
           script: ./deploy-test.sh
