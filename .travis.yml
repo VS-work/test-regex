@@ -22,6 +22,4 @@ jobs:
         - provider: script
           script: ./deploy-test.sh
           on:
-            all_branches: true
-            condition: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^deploy\/.*$ 
-          
+            branch: $TRAVIS_BRANCH
