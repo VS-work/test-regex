@@ -4,9 +4,8 @@ language: node_js
 node_js: '8'
 notifications:
   email: false
-git:
-  submodules: false
-stages:
+
+  stages:
   - name: Deploy release branch
 script:
 - echo "skipping tests"
@@ -21,4 +20,4 @@ jobs:
         - provider: script
           script: ./deploy-test.sh
           on:
-            branch: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^(?i:deploy)-.*$ 
+            branch: /^(?i:deploy)-.*$/ 
