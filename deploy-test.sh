@@ -1,3 +1,10 @@
+#!/bin/bash
+
+set -e
+
+
+
+
 echo YESSS!!!!
 
 
