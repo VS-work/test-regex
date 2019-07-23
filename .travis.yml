@@ -10,16 +10,17 @@ stages:
   - name: Deploy release branch
 script:
 - echo "skipping tests"
-branches:
-  only:
-  - /^(?i:deploy)-.*$/
+- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+
 jobs:
   fast_finish: true
   include:
     - stage: Deploy release branch
-      if: branch =  /^(?i:deploy)-.*$/   AND type = push
       deploy:
         - provider: script
           script: ./deploy-test.sh
           on:
-            branch:  /^(?i:deploy)-.*$/ 
+            all_branches: true
+            condition: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^deploy\/.*$ 
+                
